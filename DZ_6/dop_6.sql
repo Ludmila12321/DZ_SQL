@@ -9,14 +9,12 @@ CREATE FUNCTION hello()
 BEGIN
 DECLARE result_text VARCHAR(25);
 SELECT CASE 
-	WHEN CURRENT_TIME >= '06:00:00' AND  CURRENT_TIME < '12:00:00' THEN 'Доброе утро'
-    WHEN CURRENT_TIME >= '12:00:00' AND  CURRENT_TIME < '18:00:00' THEN 'Добрый день'
-	WHEN CURRENT_TIME >= '00:00:00' AND  CURRENT_TIME < '06:00:00' THEN 'Доброй ночи'
-	ELSE 'Добрый вечер'
+	WHEN current_time() >= "06:00:00" AND  current_time() < "12:00:00" THEN 'Доброе утро'
+    WHEN current_time() >= "12:00:00" AND  current_time() < "18:00:00" THEN 'Добрый день'
+	WHEN current_time() >= "18:00:00" AND  current_time() < "00:00:00" THEN 'Добрый вечер'
+	ELSE 'Доброй ночи'
 END INTO result_text;
 RETURN result_text;
 END $$
-
 DELIMITER ;
-
 SELECT hello();
